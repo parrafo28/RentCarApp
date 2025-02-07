@@ -1,19 +1,13 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using RentCarApp.Frontend.Models;
+using System.Diagnostics;
 
 namespace RentCarApp.Frontend.Controllers
 {
     public class HomeController : Controller
-    {
-        private readonly ILogger<HomeController> _logger;
+    { 
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
-        public IActionResult Index()
+        private IActionResult Index()
         {
             var mySecretKey = "sdfsdfsdfsdf";
             return View();
