@@ -1,4 +1,4 @@
-# RentCarApp
+# RentCarApp (Thursday)
 
 This is an Console App for rental Services
 
