@@ -7,9 +7,8 @@ namespace RentCarApp.Frontend.Controllers
     public class HomeController : Controller
     { 
 
-        private IActionResult Index()
-        {
-            var mySecretKey = "sdfsdfsdfsdf";
+        public IActionResult Index()
+        { 
             return View();
         }
 

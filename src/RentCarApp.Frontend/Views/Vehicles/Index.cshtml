@@ -9,6 +9,17 @@
 <p>
     <a class="btn btn-primary" asp-action="Create">Create New</a>
 </p>
+<div class="row">
+    <div class="form-group">
+        <div class="col-md-6">
+
+        </div>
+        <div class="col-md-2">
+            <a class="btn btn-primary" asp-route-brand="toy" asp-route-model="RAV4"  >Buscar</a>
+        </div>
+    </div>
+
+</div>
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
@@ -44,7 +55,7 @@
             </td>
             <td>
                     <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a class="btn btn-info"  asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Details</a> |
                     <a class="btn btn-danger"  asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>

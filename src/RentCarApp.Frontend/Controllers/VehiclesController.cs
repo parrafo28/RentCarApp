@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RentCarApp.Frontend.Data;
@@ -18,11 +14,20 @@ namespace RentCarApp.Frontend.Controllers
         {
             _context = context;
         }
-         
-        public async Task<IActionResult> Index()
-        {
 
-            return View(await _context.Vehicles.ToListAsync());
+        public async Task<IActionResult> Index(string model, string brand)
+        {
+            var entities =   _context.Vehicles.Where(p=> p.Id >0);
+            var filterResult = entities;// new List<Vehicle>();
+            if (!string.IsNullOrEmpty(brand))
+            {
+                filterResult = entities.Where(v => v.Brand.ToLower().Contains(brand.ToLower())) ;
+            }
+            if (!string.IsNullOrEmpty(model))
+            {
+                filterResult = entities.Where(v => v.Model.ToLower().Contains(model.ToLower())) ;
+            }
+            return View(await filterResult.ToListAsync());
         }
 
         // GET: Vehicles/Details/5
@@ -42,26 +47,35 @@ namespace RentCarApp.Frontend.Controllers
 
             return View(vehicle);
         }
-         
-        public IActionResult Create()
-        { 
-            return View();
+
+        public async Task<IActionResult> Create()
+        {
+            var model = new VehicleModel();
+            var status = await _context.Status.ToListAsync();
+            model.Status = new SelectList(status, "Id", "Name");
+            return View(model);
         }
- 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( Vehicle vehicle)
+        public async Task<IActionResult> Create(VehicleModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                
-                _context.Add(vehicle);
+                var entity = new Vehicle();
+                entity.Brand = viewModel.Brand;
+                entity.Year = viewModel.Year;
+                entity.Model = viewModel.Model;
+                entity.Price = viewModel.Price;
+                entity.StatusId = viewModel.StatusId;
+
+                _context.Vehicles.Add(entity);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(vehicle);
+            return View(viewModel);
         }
-         
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -69,17 +83,17 @@ namespace RentCarApp.Frontend.Controllers
                 return NotFound();
             }
 
-            var vehicle = await _context.Vehicles.FindAsync(id);
-            if (vehicle == null)
+            var entity = await _context.Vehicles.FindAsync(id);
+            if (entity == null)
             {
                 return NotFound();
             }
-            return View(vehicle);
+            return View(entity);
         }
- 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id,  Vehicle vehicle)
+        public async Task<IActionResult> Edit(int id, Vehicle vehicle)
         {
             if (id != vehicle.Id)
             {
@@ -108,7 +122,7 @@ namespace RentCarApp.Frontend.Controllers
             }
             return View(vehicle);
         }
-         
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -125,7 +139,7 @@ namespace RentCarApp.Frontend.Controllers
 
             return View(vehicle);
         }
-         
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

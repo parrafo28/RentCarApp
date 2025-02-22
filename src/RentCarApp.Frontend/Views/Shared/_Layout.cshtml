@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - RentCarApp.Frontend</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/RentCarApp.Frontend.styles.css" asp-append-version="true" />
 </head>
@@ -29,6 +29,10 @@
                         <li class="nav-item identifyers">
 
                             <a class="nav-link text-dark"  asp-controller="Vehicles" asp-action="Index"> Carros</a>
+                        </li>
+                        <li class="nav-item identifyers">
+
+                            <a class="nav-link text-dark" asp-controller="Status" asp-action="Index"> Stados</a>
                         </li>
                     </ul>
                 </div>

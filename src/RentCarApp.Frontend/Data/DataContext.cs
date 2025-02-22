@@ -9,6 +9,8 @@ namespace RentCarApp.Frontend.Data
         {
         }
 
-        public DbSet<RentCarApp.Frontend.Models.Vehicle> Vehicles { get; set; } = default!;
+        public DbSet<RentCarApp.Frontend.Models.Vehicle> Vehicles { get; set; }  
+        public DbSet<RentCarApp.Frontend.Models.Status> Status { get; set; }
+
     }
 }
