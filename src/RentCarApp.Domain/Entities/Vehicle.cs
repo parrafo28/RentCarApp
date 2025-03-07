@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace RentCarApp.Frontend.Models
+namespace RentCarApp.Domain.Entities
 {
     public class Vehicle
     {

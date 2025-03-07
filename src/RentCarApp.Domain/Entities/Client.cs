@@ -1,4 +1,4 @@
-﻿namespace RentCarApp.Frontend.Models
+﻿namespace RentCarApp.Domain.Entities
 {
     public class Client
     {

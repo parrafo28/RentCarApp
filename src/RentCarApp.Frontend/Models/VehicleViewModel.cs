@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RentCarApp.Frontend.Models
 {
-    public class VehicleModel
+    public class VehicleViewModel
     {
         public int Id { get; set; }
 

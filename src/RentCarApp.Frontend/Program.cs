@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using RentCarApp.Frontend.Data;
+using RentCarApp.Persistence;
+
 //using RentCarApp.Frontend.Data;
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using RentCarApp.Frontend.Data;
+using RentCarApp.Domain.Entities; 
 using RentCarApp.Frontend.Models;
+using RentCarApp.Persistence;
 
 namespace RentCarApp.Frontend.Controllers
 {
@@ -50,7 +51,7 @@ namespace RentCarApp.Frontend.Controllers
 
         public async Task<IActionResult> Create()
         {
-            var model = new VehicleModel();
+            var model = new VehicleViewModel();
             var status = await _context.Status.ToListAsync();
             model.Status = new SelectList(status, "Id", "Name");
             return View(model);
@@ -58,7 +59,7 @@ namespace RentCarApp.Frontend.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(VehicleModel viewModel)
+        public async Task<IActionResult> Create(VehicleViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
