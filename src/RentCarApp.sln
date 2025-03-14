@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentCarApp.Persistence", "R
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentCarApp.Domain", "RentCarApp.Domain\RentCarApp.Domain.csproj", "{C1A30FAF-12AF-49E8-BB7A-386B619D454E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosting", "Hosting", "{A60CE50F-01E2-4574-AD52-F3AD80B82518}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentCarApp.Presentation", "RentCarApp.Presentation\RentCarApp.Presentation.csproj", "{634792D7-AC93-4209-83E2-2F577247A6B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,8 +37,17 @@ Global
 		{C1A30FAF-12AF-49E8-BB7A-386B619D454E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1A30FAF-12AF-49E8-BB7A-386B619D454E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1A30FAF-12AF-49E8-BB7A-386B619D454E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{634792D7-AC93-4209-83E2-2F577247A6B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{634792D7-AC93-4209-83E2-2F577247A6B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{634792D7-AC93-4209-83E2-2F577247A6B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{634792D7-AC93-4209-83E2-2F577247A6B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7B04FA4D-F9D2-469B-9A73-A437CB5D191F} = {A60CE50F-01E2-4574-AD52-F3AD80B82518}
+		{FABFCBCD-315A-4606-B4D2-01A317E35AE1} = {A60CE50F-01E2-4574-AD52-F3AD80B82518}
+		{634792D7-AC93-4209-83E2-2F577247A6B1} = {A60CE50F-01E2-4574-AD52-F3AD80B82518}
 	EndGlobalSection
 EndGlobal

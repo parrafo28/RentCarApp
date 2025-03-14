@@ -31,7 +31,7 @@ namespace RentCarApp.Api.Controllers
             var listToReturn = new List<StatusDto>();
             foreach (var item in list)
             {
-                listToReturn.Add(new StatusDto { Name = item.Name, Id= item.Id });
+                listToReturn.Add(new StatusDto { Name = item.Name, Id = item.Id });
             }
             return Ok(listToReturn);
         }
@@ -59,6 +59,25 @@ namespace RentCarApp.Api.Controllers
             _context.Status.Add(status);
             await _context.SaveChangesAsync();
             return Ok(new { success = true, message = "Created successfully!" });
+        }
+
+        [HttpPut(nameof(Update))]
+        public async Task<IActionResult> Update([FromBody] StatusDto dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Not found");
+            }
+            var statusDb = await _context.Status.FindAsync(dto.Id);
+            if (statusDb == null)
+            {
+                return NotFound($"Status {dto.Name} was not found");
+            }
+            statusDb.Name   = dto.Name;
+             
+            _context.Status.Update(statusDb);
+            await _context.SaveChangesAsync();
+            return Ok(new { success = true, message = "Updated successfully!" });
         }
 
 
