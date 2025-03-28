@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using RentCarApp.Domain.Entities;
 using RentCarApp.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +24,8 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader();
         });
 });
+builder.Services.AddTransient<StatusRepository>();
+
 
 var app = builder.Build();
 

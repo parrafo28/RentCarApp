@@ -1,61 +1,60 @@
 using Microsoft.AspNetCore.Mvc;
 using RentCarApp.Domain.Entities;
 using RentCarApp.Frontend.Models;
-using RentCarApp.Persistence;
 
 namespace RentCarApp.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class StatusController : ControllerBase
+    public class VehiclesController : ControllerBase
     {
-        private readonly StatusRepository _statusRepository;
+        private readonly VehicleRepository _vehiclesRepository;
 
-        public StatusController(StatusRepository statusRepository)
-        {  
-            _statusRepository = statusRepository;
+        public VehiclesController(VehicleRepository vehiclesRepository)
+        {
+            _vehiclesRepository = vehiclesRepository;
         }
 
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll(string filter = "")
         {
-            return Ok(await _statusRepository.GetAll(filter));
+            return Ok(await _vehiclesRepository.GetAll(filter));
         }
 
         [HttpGet("Get/{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var status = await _statusRepository.GetById(id);
-            if (status == null)
+            var vehicles = await _vehiclesRepository.GetById(id);
+            if (vehicles == null)
             {
                 return BadRequest("Not found");
             }
-            return Ok(status);
+            return Ok(vehicles);
         }
 
 
 
         [HttpPost("Add")]
-        public async Task<IActionResult> Create([FromBody] StatusDto dto)
+        public async Task<IActionResult> Create([FromBody] VehicleDto dto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest("Not found");
             }
-           var id= await _statusRepository.Add(dto);
-            return Ok(new { success = true,id=id, message = "Created successfully!" });
+            var id = await _vehiclesRepository.Add(dto);
+            return Ok(new { success = true, id = id, message = "Created successfully!" });
         }
 
 
 
         [HttpPut(nameof(Update))]
-        public async Task<IActionResult> Update([FromBody] StatusDto dto)
+        public async Task<IActionResult> Update([FromBody] VehicleDto dto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest("Not found");
             }
-            var response = await _statusRepository.Update(dto);
+            var response = await _vehiclesRepository.Update(dto);
             if (!response)
             {
                 return Ok(new { success = false, message = "We coulnd update" });

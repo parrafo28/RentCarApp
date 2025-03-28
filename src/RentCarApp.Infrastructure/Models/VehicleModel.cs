@@ -1,11 +1,11 @@
-﻿using RentCarApp.Domain.Core;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace RentCarApp.Domain.Entities
 {
-    public class Vehicle: BaseEntity
-    { 
+    public class VehicleModel
+    {
+        public int Id { get; set; }
 
         [StringLength(50, ErrorMessage = "La cantidad maxima de caracteres es 50")]
         [DisplayName("Marca")]
@@ -18,7 +18,7 @@ namespace RentCarApp.Domain.Entities
 
         public decimal Price { get; set; }
         public int StatusId { get; set; }
-        public Status Status { get; set; }
+        public StatusModel Status { get; set; }
 
     }
 }

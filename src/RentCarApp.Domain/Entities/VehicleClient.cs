@@ -1,8 +1,9 @@
-﻿namespace RentCarApp.Domain.Entities
+﻿using RentCarApp.Domain.Core;
+
+namespace RentCarApp.Domain.Entities
 {
-    public class VehicleClient
-    {
-        public int Id { get; set; }
+    public class VehicleClient: BaseEntity
+    { 
         public int ClientId { get; set; }
         public int VehicleId { get; set; }
     }
