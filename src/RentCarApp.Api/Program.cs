@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using RentCarApp.Domain.Entities;
+using RentCarApp.Infrastructure.Core;
 using RentCarApp.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,7 +24,9 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader();
         });
 });
-builder.Services.AddTransient<StatusRepository>();
+
+builder.Services.AddTransient<IStatusRepository, StatusRepository>();
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 
 var app = builder.Build();

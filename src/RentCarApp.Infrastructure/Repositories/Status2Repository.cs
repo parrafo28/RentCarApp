@@ -5,13 +5,14 @@ using RentCarApp.Persistence;
 
 namespace RentCarApp.Domain.Entities
 {
-    public class StatusRepository : BaseRepository<Status>, IStatusRepository
+    public class Status2Repository : BaseRepository<Status>, IStatusRepository
     {
-        public StatusRepository(DataContext context) : base(context) { }
+        public Status2Repository(DataContext context) : base(context) { }
 
         public async Task<List<StatusDto>> GetAll(string filter)
         {
 
+            Console.WriteLine("sssdsdsd");
             var list = await Context.Status
                 .ToListAsync();
 

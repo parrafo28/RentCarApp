@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RentCarApp.Domain.Entities;
 using RentCarApp.Frontend.Models;
-using RentCarApp.Persistence;
+using RentCarApp.Infrastructure.Core;
 
 namespace RentCarApp.Api.Controllers
 {
@@ -9,11 +9,13 @@ namespace RentCarApp.Api.Controllers
     [Route("[controller]")]
     public class StatusController : ControllerBase
     {
-        private readonly StatusRepository _statusRepository;
+        private readonly IStatusRepository _statusRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public StatusController(StatusRepository statusRepository)
-        {  
+        public StatusController(IStatusRepository statusRepository, IUnitOfWork unitOfWork)
+        {
             _statusRepository = statusRepository;
+            _unitOfWork = unitOfWork;
         }
 
         [HttpGet("GetAll")]
@@ -42,8 +44,21 @@ namespace RentCarApp.Api.Controllers
             {
                 return BadRequest("Not found");
             }
-           var id= await _statusRepository.Add(dto);
-            return Ok(new { success = true,id=id, message = "Created successfully!" });
+            int id = 0;
+            try
+            {
+                await _unitOfWork.BeginTransactionAsync();
+                id = await _statusRepository.Add(dto);
+                await _unitOfWork.CompleteAsync();
+                await _unitOfWork.CommitTransactionAsync();
+            }
+            catch (Exception ex)
+            {
+                await _unitOfWork.RollbackTransactionAsync();
+                throw;
+            }
+
+            return Ok(new { success = true, id = id, message = "Created successfully!" });
         }
 
 

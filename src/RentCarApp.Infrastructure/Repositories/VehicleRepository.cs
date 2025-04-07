@@ -5,7 +5,7 @@ using RentCarApp.Persistence;
 
 namespace RentCarApp.Domain.Entities
 {
-    public class VehicleRepository : BaseRepository<Vehicle>
+    public class VehicleRepository : BaseRepository<Vehicle>, IVehicleRepository
     {
         public VehicleRepository(DataContext context) : base(context) { }
 
@@ -65,9 +65,9 @@ namespace RentCarApp.Domain.Entities
                 Year = dto.Year
             };
 
-            return await Add(entity); 
+            return await Add(entity);
         }
-         
+
         public async Task<bool> Update(VehicleDto dto)
         {
             var entity = await GetEntityById(dto.Id);
